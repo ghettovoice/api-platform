@@ -11,8 +11,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ApiResource
  * @ORM\Entity
+ * @ORM\Table(name="groups")
  */
-class Greeting
+class Group
 {
     /**
      * @var int The entity Id
@@ -24,15 +25,30 @@ class Greeting
     private $id;
 
     /**
-     * @var string A nice person
+     * @var string
      *
      * @ORM\Column
      * @Assert\NotBlank
      */
-    public $name = '';
+    private $name;
+
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+    }
 
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 }
